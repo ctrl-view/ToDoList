@@ -6,7 +6,7 @@ const ButtonCSS = styled.button`
     padding: 10px 14px 10px;
     font-family: inherit;
     border-radius: 6px;
-    background-color: #B0F347;
+    background-color: ${props => props.$primary==='' ? "rgb(229,229,229)" : "rgb(176,243,71)"};
     cursor: pointer;
     margin-left: 10px;
     @media (max-width: 768px) {
@@ -17,10 +17,10 @@ const ButtonCSS = styled.button`
 
 const Button = (props) => {
 
-    const {children, onClick} = props
+    const {children, onClick, value} = props
 
     return (
-        <ButtonCSS onClick={onClick}>{children}</ButtonCSS>
+        <ButtonCSS $primary={value} onClick={onClick}>{children}</ButtonCSS>
     )
 }
 

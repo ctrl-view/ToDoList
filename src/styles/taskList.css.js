@@ -10,7 +10,7 @@ const css = {
         height: auto;
         border-radius: 8px;
         box-shadow: 0px 0px 3px grey;
-        margin: 40px auto;
+        margin: 20px auto 40px;
         padding: 20px;
         padding-bottom: 10px;
         width: 100%;

@@ -7,28 +7,49 @@ const {DataContainer, ContentLine, ContentCell, ButtonsLine, ButtonItem} = css
 
 const TaskList = (props) => {
 
-    const [filter, setFilter] = useState('все')
+    const [filters, setFilters] = useState({
+        category: '',
+        completed: ''
+    })
     const{data=[], onDelete, taskChange} = props
+
+    const handleFilterChange = (e) => {
+        const {name, value} = e.target;
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            [name]: value,
+        }))
+    }
+
     const filterData = data.filter(item => {
-        if (filter==='активные') return item.completed === false
-        if (filter==='завершенные') return item.completed === true
+        return (
+            (filters.category === '' || item.category === filters.category) &&
+            (filters.completed === '' || item.completed.toString() === filters.completed)
+        );
     }
     )
     return (
         <>
-            <ButtonsLine>
-                <ButtonItem style={{fontWeight: filter==='все' ? 'bold' : ''}} onClick={()=>setFilter('все')}>
-                    Все задачи
-                </ButtonItem>
-                <ButtonItem style={{fontWeight: filter==='активные' ? 'bold' : ''}} onClick={()=>setFilter('активные')}>
-                    Активные задачи
-                </ButtonItem>
-                <ButtonItem style={{fontWeight: filter==='завершенные' ? 'bold' : ''}} onClick={()=>setFilter('завершенные')}>
-                    Завершенные задачи
-                </ButtonItem>
-            </ButtonsLine>
+            <div style={{ margin: '10px auto', maxWidth: '800px' }}>
+            <select name="category"
+                value={filters.category}
+                onChange={handleFilterChange}
+                style={{ marginRight: '10px' }}>
+                <option value="">Все категории</option>
+                <option value="учеба">Учёба</option>
+                <option value="работа">Работа</option>
+                <option value="домашние дела">Домашние дела</option>
+                <option value="другое">Другое</option>
+            </select>
+            <select name="completed" value={filters.completed}
+                onChange={handleFilterChange}
+                style={{ marginRight: '10px' }}>
+                <option value="">Все задачи</option>
+                <option value="false">Активные</option>
+                <option value="true">Завершённые</option>
+            </select>
+            </div>  
             <DataContainer>
-                {filter!=='все' ? <>
                 {filterData.map((item, index) => {
                     
                     return (
@@ -42,23 +63,8 @@ const TaskList = (props) => {
                     </ContentCell>
                 </ContentLine>
                     )
-                })}</> : 
-                <>
-                {data.map((item) => {
-                    
-                    return (
-                <ContentLine key={item.id} style={{marginBottom: '10px'}}>
-                    <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'80%'}>{item.task}</ContentCell>
-                    <ContentCell width={'10%'}>
-                        <Button onClick={()=>taskChange(item.id)}>{ item.completed===false ? <BiCheck /> : <BiRevision />}</Button>
-                    </ContentCell>
-                    <ContentCell width={'10%'}>
-                        <Button onClick={()=>onDelete(item.id)}><FaTrash /></Button>
-                    </ContentCell>
-                </ContentLine>
-                    )
-                })}</>
-            }
+                })}
+
             </DataContainer>
 
         </>
