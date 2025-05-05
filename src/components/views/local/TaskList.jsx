@@ -53,8 +53,9 @@ const TaskList = (props) => {
                 {filterData.map((item, index) => {
                     
                     return (
+                
                 <ContentLine key={item.id} style={{marginBottom: '10px'}}>
-                    <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'80%'}>{item.task}</ContentCell>
+                    <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'80%'}>{item.task} <span style={{color: 'rgb(176,243,71)'}}>{item.deadline}</span></ContentCell>
                     <ContentCell width={'10%'}>
                         <Button onClick={()=>taskChange(item.id)}>{ item.completed===false ? <BiCheck /> : <BiRevision />}</Button>
                     </ContentCell>

@@ -8,9 +8,10 @@ const ButtonCSS = styled.button`
     border-radius: 6px;
     background-color: ${props => props.$primary==='' ? "rgb(229,229,229)" : "rgb(176,243,71)"};
     cursor: pointer;
-    margin-left: 10px;
+    margin: 0 auto;
     @media (max-width: 768px) {
         padding: 5px;
+        margin-right: 8px;
     }
     `
 

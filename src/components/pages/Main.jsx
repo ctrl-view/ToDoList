@@ -16,6 +16,7 @@ const Main = () => {
     const [task, setTask ] = useState('')
     const [data, setData] = useState([])
     const [category, setCategory] = useState('')
+    const [deadline, setDeadline] = useState('')
 
     const handleAdd = () => {
         if (category!=='') {
@@ -25,14 +26,16 @@ const Main = () => {
                 id: Date.now(),
                 task: task, 
                 completed: false,
-                category: category
+                category: category,
+                deadline: deadline
             }, ...prev]
             localStorage.setItem('tasks', JSON.stringify(newData))
             return newData
         }
         )
 
-        setTask('')}
+        setTask('')
+        setDeadline('')}
     }
 
     const onComplete = (id) => {
@@ -74,7 +77,8 @@ const Main = () => {
         <Wrap>
             <FormContainer>
                 <InputComponent inputTask={task} action={setTask} placeholder={'Введите задачу'}></InputComponent>
-                <FormControl>
+                <InputComponent inputTask={deadline} action={setDeadline} placeholder={'Введите срок задачи'}></InputComponent>
+                <FormControl style={{marginLeft: '8px'}}>
                     <FormLabel id="demo-controlled-radio-buttons-group">Выберите тип задачи</FormLabel>
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
@@ -88,6 +92,7 @@ const Main = () => {
                         <FormControlLabel value="другое" control={<Radio />} label="Другое" />
                     </RadioGroup>
                 </FormControl>
+                
                 <Button value={category} onClick={handleAdd}>Добавить задачу</Button>
             </FormContainer>
             <TaskList data={data} onDelete={handleDelete} taskChange={onComplete}></TaskList>

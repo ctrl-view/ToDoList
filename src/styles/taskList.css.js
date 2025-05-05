@@ -33,8 +33,9 @@ const css = {
         position: relative;
         width: ${props => props.width};
         font-size: 14px;
-        text-align: center;
+        text-align: start;
         box-sizing: border-box;
+        word-break: break-word;
     `,
     ButtonsLine: styled.div`
         display: flex;

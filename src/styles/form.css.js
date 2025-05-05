@@ -9,7 +9,6 @@ const css = {
     FormContainer: styled.div`
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: flex-start;
         position: relative;
         height: auto;
@@ -21,6 +20,7 @@ const css = {
         width: 100%;
         max-width: 600px;
         box-sizing: border-box;
+        
 
     `,
     Input: styled.input`
@@ -35,6 +35,7 @@ const css = {
         border-radius: 4px;
         padding-left: 14px;
         margin-bottom: 10px;
+        box-sizing: border-box;
         &:last-child {
             margin-bottom: 0px;
         }
