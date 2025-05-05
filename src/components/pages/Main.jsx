@@ -76,8 +76,8 @@ const Main = () => {
         <>
         <Wrap>
             <FormContainer>
-                <InputComponent inputTask={task} action={setTask} placeholder={'Введите задачу'}></InputComponent>
-                <InputComponent inputTask={deadline} action={setDeadline} placeholder={'Введите срок задачи'}></InputComponent>
+                <InputComponent inputValue={task} action={setTask} placeholder={'Введите задачу'}></InputComponent>
+                <InputComponent inputValue={deadline} action={setDeadline} placeholder={'Введите срок задачи'}></InputComponent>
                 <FormControl style={{marginLeft: '8px'}}>
                     <FormLabel id="demo-controlled-radio-buttons-group">Выберите тип задачи</FormLabel>
                     <RadioGroup

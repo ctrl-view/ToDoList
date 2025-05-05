@@ -6,7 +6,7 @@ const {Input} = css
 
 const InputComponent = (props) => {
 
-    const {placeholder, inputTask, action} = props
+    const {placeholder, inputValue, action} = props
 
     const maxLength = 100
 
@@ -14,7 +14,7 @@ const InputComponent = (props) => {
         <>
             <Input
             type={"text"}
-            value={inputTask}
+            value={inputValue}
             placeholder={placeholder}
             maxLength={maxLength}
             onChange={event=> {
