@@ -8,8 +8,9 @@ const css = {
     justify-content: space-between;
     position: relative;
     height: 80px;
-    background-color: #202634;
+    background-color: #1a1f2b;
     padding: 0 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     `,
     FooterContainer: styled.footer`
     display: flex;
@@ -19,12 +20,19 @@ const css = {
     position: relative;
     width: 100%;
     height: 80px;
-    background-color: #E5E5E5;
+    background-color: #f8f9fa;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
     `,
     HeaderCSS: {
         Logo: styled.div`
-        font-size: 30px;
-        color: #B0F347;
+        font-size: 32px;
+        font-weight: 600;
+        color: #7cff6b;
+        text-shadow: 0 0 10px rgba(176, 243, 71, 0.3);
+        transition: all 0.3s ease;
+        &:hover {
+            transform: scale(1.05);
+        }
         `,
         MenuContainer: styled.div`
         display: flex;
@@ -32,6 +40,7 @@ const css = {
         align-items: center;
         justify-content: flex-start;
         position: relative;
+        gap: 20px;
         `
     }
 }
