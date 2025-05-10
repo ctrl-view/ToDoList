@@ -78,7 +78,7 @@ const Main = () => {
             <FormContainer>
                 <InputComponent inputValue={task} action={setTask} placeholder={'Введите задачу'}></InputComponent>
                 <InputComponent inputValue={deadline} action={setDeadline} placeholder={'Введите срок задачи'}></InputComponent>
-                <FormControl style={{marginLeft: '8px'}}>
+                <FormControl>
                     <FormLabel id="demo-controlled-radio-buttons-group">Выберите тип задачи</FormLabel>
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"

@@ -22,6 +22,12 @@ const css = {
         max-width: 600px;
         box-sizing: border-box;
         transition: all 0.3s ease;
+        gap: 16px;
+
+        & > * {
+            margin: 0;
+        }
+
         &:hover {
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
         }
@@ -37,7 +43,6 @@ const css = {
         background-color: #f8f9fa;
         border-radius: 8px;
         padding: 0 16px;
-        margin-bottom: 16px;
         box-sizing: border-box;
         font-size: 15px;
         transition: all 0.2s ease;
@@ -45,9 +50,6 @@ const css = {
             border-color: #7cff6b;
             background-color: white;
             box-shadow: 0 0 0 3px rgba(124, 255, 107, 0.1);
-        }
-        &:last-child {
-            margin-bottom: 0px;
         }
     `,
     Button: styled.span`
