@@ -3,18 +3,18 @@ import css from "../../../styles/taskList.css"
 import Button from "../../comps/Button"
 import { FaTrash } from 'react-icons/fa'
 import { BiCheck, BiRevision } from "react-icons/bi";
-const {DataContainer, ContentLine, ContentCell, ButtonsLine, ButtonItem, SelectContainer, Select} = css
+const { DataContainer, ContentLine, ContentCell, SelectContainer, Select, PriorityBadge } = css
 
 const TaskList = (props) => {
-
     const [filters, setFilters] = useState({
         category: '',
-        completed: ''
+        completed: '',
+        priority: ''
     })
-    const{data=[], onDelete, taskChange} = props
+    const { data = [], onDelete, taskChange } = props
 
     const handleFilterChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFilters((prevFilters) => ({
             ...prevFilters,
             [name]: value,
@@ -24,14 +24,24 @@ const TaskList = (props) => {
     const filterData = data.filter(item => {
         return (
             (filters.category === '' || item.category === filters.category) &&
-            (filters.completed === '' || item.completed.toString() === filters.completed)
+            (filters.completed === '' || item.completed.toString() === filters.completed) &&
+            (filters.priority === '' || item.priority === filters.priority)
         );
+    })
+
+    const getPriorityColor = (priority) => {
+        switch (priority) {
+            case 'high': return '#ff4d4d';
+            case 'medium': return '#ffd700';
+            case 'low': return '#7cff6b';
+            default: return '#7cff6b';
+        }
     }
-    )
+
     return (
         <>
             <SelectContainer>
-                <Select 
+                <Select
                     name="category"
                     value={filters.category}
                     onChange={handleFilterChange}
@@ -42,8 +52,8 @@ const TaskList = (props) => {
                     <option value="домашние дела">Домашние дела</option>
                     <option value="другое">Другое</option>
                 </Select>
-                <Select 
-                    name="completed" 
+                <Select
+                    name="completed"
                     value={filters.completed}
                     onChange={handleFilterChange}
                 >
@@ -51,21 +61,38 @@ const TaskList = (props) => {
                     <option value="false">Активные</option>
                     <option value="true">Завершённые</option>
                 </Select>
+                <Select
+                    name="priority"
+                    value={filters.priority}
+                    onChange={handleFilterChange}
+                >
+                    <option value="">Все приоритеты</option>
+                    <option value="low">Низкий</option>
+                    <option value="medium">Средний</option>
+                    <option value="high">Высокий</option>
+                </Select>
             </SelectContainer>
             <DataContainer>
-                {filterData.map((item, index) => {
-                    return (
-                        <ContentLine key={item.id} style={{marginBottom: '10px'}}>
-                            <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'70%'}>{item.task} <span style={{color: 'rgb(89,154,4)'}}>{item.deadline}</span></ContentCell>
-                            <ContentCell width={'15%'}>
-                                <Button onClick={()=>taskChange(item.id)}>{ item.completed===false ? <BiCheck /> : <BiRevision />}</Button>
-                            </ContentCell>
-                            <ContentCell width={'15%'}>
-                                <Button onClick={()=>onDelete(item.id)}><FaTrash /></Button> 
-                            </ContentCell>
-                        </ContentLine>
-                    )
-                })}
+                {filterData.map((item) => (
+                    <ContentLine key={item.id}>
+                        <ContentCell style={{ textDecoration: item.completed ? 'line-through' : '' }} width="70%">
+                            <PriorityBadge color={getPriorityColor(item.priority)} />
+                            {item.task}
+                            {item.deadline && <span style={{ color: 'rgb(89,154,4)', marginLeft: '8px' }}>{item.deadline}</span>}
+                        </ContentCell>
+                        <ContentCell width="15%">
+                            <Button onClick={() => taskChange(item.id)}>{item.completed ? <BiRevision /> : <BiCheck />}</Button>
+                        </ContentCell>
+                        <ContentCell width="15%">
+                            <Button onClick={() => onDelete(item.id)}><FaTrash /></Button>
+                        </ContentCell>
+                    </ContentLine>
+                ))}
+                {filterData.length === 0 && (
+                    <ContentLine style={{ justifyContent: 'center', color: '#6c757d' }}>
+                        Нет задач
+                    </ContentLine>
+                )}
             </DataContainer>
         </>
     )

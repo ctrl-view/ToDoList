@@ -17,6 +17,7 @@ const css = {
         max-width: 800px;
         box-sizing: border-box;
         transition: all 0.3s ease;
+        min-height: 200px;
         &:hover {
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
         }
@@ -40,7 +41,8 @@ const css = {
         }
     `,
     ContentCell: styled.span`
-        display: block;
+        display: flex;
+        align-items: center;
         position: relative;
         width: ${props => {
             if (props.width === '70%') {
@@ -56,6 +58,7 @@ const css = {
         box-sizing: border-box;
         word-break: break-word;
         line-height: 1.5;
+        gap: 8px;
 
         @media (max-width: 768px) {
             width: ${props => {
@@ -66,33 +69,6 @@ const css = {
                 }
                 return props.width;
             }};
-        }
-    `,
-    ButtonsLine: styled.div`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        position: relative;
-        margin: 0 auto;
-        margin-top: 40px;
-        width: 100%;
-        max-width: 800px;
-        box-sizing: border-box;
-        gap: 20px;
-    `,
-    ButtonItem: styled.span`
-        display: block;
-        position: relative;
-        font-size: 14px;
-        color: #6c757d;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        padding: 8px 16px;
-        border-radius: 6px;
-        &:hover {
-            color: #495057;
-            background-color: #f8f9fa;
         }
     `,
     SelectContainer: styled.div`
@@ -135,6 +111,13 @@ const css = {
             width: 100%;
             min-width: unset;
         }
+    `,
+    PriorityBadge: styled.span`
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: ${props => props.color};
+        margin-right: 8px;
     `
 }
 
