@@ -79,8 +79,10 @@ const TaskList = (props) => {
                                 <PriorityBadge color={getPriorityColor(item.priority)} />
                             </ContentCell>
                             <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'70%'}>
-                                {item.task}
-                                {item.deadline && <span style={{ color: 'rgb(89,154,4)', marginLeft: '8px' }}>{item.deadline}</span>}
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap' }}>
+                                    <span>{item.task}</span>
+                                    {item.deadline && <span style={{ color: 'rgb(89,154,4)', whiteSpace: 'nowrap' }}>{item.deadline}</span>}
+                                </div>
                             </ContentCell>
                             <ContentCell width={'15%'}>
                                 <Button onClick={()=>taskChange(item.id)}>{ item.completed===false ? <BiCheck /> : <BiRevision />}</Button>
