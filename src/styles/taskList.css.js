@@ -40,7 +40,7 @@ const css = {
         }
     `,
     ContentCell: styled.span`
-        display: block;
+        display: flex;
         position: relative;
         width: ${props => {
             if (props.width === '70%') {
@@ -68,32 +68,12 @@ const css = {
             }};
         }
     `,
-    ButtonsLine: styled.div`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        position: relative;
-        margin: 0 auto;
-        margin-top: 40px;
-        width: 100%;
-        max-width: 800px;
-        box-sizing: border-box;
-        gap: 20px;
-    `,
-    ButtonItem: styled.span`
-        display: block;
-        position: relative;
-        font-size: 14px;
-        color: #6c757d;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        padding: 8px 16px;
-        border-radius: 6px;
-        &:hover {
-            color: #495057;
-            background-color: #f8f9fa;
-        }
+    PriorityBadge: styled.span`
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: ${props => props.color};
+        margin-right: 8px;
     `,
     SelectContainer: styled.div`
         display: flex;

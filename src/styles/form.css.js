@@ -46,6 +46,8 @@ const css = {
         box-sizing: border-box;
         font-size: 15px;
         transition: all 0.2s ease;
+        color: #495057;
+
         &:focus {
             border-color: #7cff6b;
             background-color: white;
