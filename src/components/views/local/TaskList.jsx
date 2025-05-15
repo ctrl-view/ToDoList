@@ -6,16 +6,15 @@ import { BiCheck, BiRevision } from "react-icons/bi";
 const {DataContainer, ContentLine, ContentCell, PriorityBadge, SelectContainer, Select} = css
 
 const TaskList = (props) => {
-
     const [filters, setFilters] = useState({
         category: '',
         completed: '',
         priority: '',
     })
-    const{data=[], onDelete, taskChange} = props
+    const { data = [], onDelete, taskChange } = props
 
     const handleFilterChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFilters((prevFilters) => ({
             ...prevFilters,
             [name]: value,
@@ -31,17 +30,17 @@ const TaskList = (props) => {
     }
     )
     const getPriorityColor = (priority) => {
-    switch (priority) {
-        case 'высокий': return '#ff4d4d';
-        case 'средний': return '#ffd700';
-        case 'низкий': return '#7cff6b';
-        default: return '#7cff6b';
-    }
+        switch (priority) {
+            case 'высокий': return '#ff4d4d';
+            case 'средний': return '#ffd700';
+            case 'низкий': return '#7cff6b';
+            default: return '#7cff6b';
+        }
     }
     return (
         <>
             <SelectContainer>
-                <Select 
+                <Select
                     name="category"
                     value={filters.category}
                     onChange={handleFilterChange}
@@ -52,8 +51,8 @@ const TaskList = (props) => {
                     <option value="домашние дела">Домашние дела</option>
                     <option value="другое">Другое</option>
                 </Select>
-                <Select 
-                    name="completed" 
+                <Select
+                    name="completed"
                     value={filters.completed}
                     onChange={handleFilterChange}
                 >
@@ -75,15 +74,13 @@ const TaskList = (props) => {
             <DataContainer>
                 {filterData.map((item, index) => {
                     return (
-                        <ContentLine key={item.id} style={{marginBottom: '10px', textDecoration: item.completed===true ? 'line-through' : ''}}>
+                        <ContentLine key={item.id} style={{marginBottom: '10px'}}>
                             <ContentCell>
                                 <PriorityBadge color={getPriorityColor(item.priority)} />
                             </ContentCell>
-                            <ContentCell width={'70%'}>
-                                
+                            <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'70%'}>
                                 {item.task}
-                                {item.deadline && <span style={{ color: 'rgb(89,154,4)', marginLeft: '8px' }}>{item.deadline}
-                                </span>}
+                                {item.deadline && <span style={{ color: 'rgb(89,154,4)', marginLeft: '8px' }}>{item.deadline}</span>}
                             </ContentCell>
                             <ContentCell width={'15%'}>
                                 <Button onClick={()=>taskChange(item.id)}>{ item.completed===false ? <BiCheck /> : <BiRevision />}</Button>

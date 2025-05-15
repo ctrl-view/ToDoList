@@ -3,8 +3,10 @@ import css from "../../styles/form.css";
 
 const {Input} = css
 
+
 const InputComponent = (props) => {
-    const {placeholder, inputValue, action, type = "text"} = props
+
+    const {placeholder, inputValue, action} = props
 
     const maxLength = 100
 
@@ -41,14 +43,14 @@ const InputComponent = (props) => {
     return (
         <>
             <Input
-                type={type}
-                value={inputValue}
-                placeholder={placeholder}
-                maxLength={type === "text" ? maxLength : undefined}
-                onChange={event=> {
-                    const newValue = event.target.value
-                    action(newValue)
-                }}
+            type={"text"}
+            value={inputValue}
+            placeholder={placeholder}
+            maxLength={maxLength}
+            onChange={event=> {
+                const newValue = event.target.value
+                action(newValue)
+            }}
             />
         </>
     )
