@@ -40,7 +40,6 @@ const css = {
         }
     `,
     ContentCell: styled.span`
-        display: flex;
         position: relative;
         width: ${props => {
             if (props.width === '70%') {
@@ -56,7 +55,6 @@ const css = {
         box-sizing: border-box;
         word-break: break-word;
         line-height: 1.5;
-        gap: 8px;
 
         @media (max-width: 768px) {
             width: ${props => {
@@ -68,6 +66,12 @@ const css = {
                 return props.width;
             }};
         }
+    `,
+    PriorityCell: styled.span`
+        display: flex;
+        align-items: center;
+        width: 5%;
+        min-width: 20px;
     `,
     ButtonsLine: styled.div`
         display: flex;

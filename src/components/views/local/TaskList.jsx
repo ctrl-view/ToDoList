@@ -3,7 +3,7 @@ import css from "../../../styles/taskList.css"
 import Button from "../../comps/Button"
 import { FaTrash } from 'react-icons/fa'
 import { BiCheck, BiRevision } from "react-icons/bi";
-const {DataContainer, ContentLine, ContentCell, PriorityBadge, SelectContainer, Select} = css
+const {DataContainer, ContentLine, ContentCell, PriorityBadge, SelectContainer, Select, PriorityCell} = css
 
 const TaskList = (props) => {
     const [filters, setFilters] = useState({
@@ -75,14 +75,11 @@ const TaskList = (props) => {
                 {filterData.map((item, index) => {
                     return (
                         <ContentLine key={item.id} style={{marginBottom: '10px'}}>
-                            <ContentCell>
+                            <PriorityCell>
                                 <PriorityBadge color={getPriorityColor(item.priority)} />
-                            </ContentCell>
+                            </PriorityCell>
                             <ContentCell style={{textDecoration: item.completed===true ? 'line-through' : ''}} width={'70%'}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap' }}>
-                                    <span>{item.task}</span>
-                                    {item.deadline && <span style={{ color: 'rgb(89,154,4)', whiteSpace: 'nowrap' }}>{item.deadline}</span>}
-                                </div>
+                                {item.task}{item.deadline ? <span style={{ color: 'rgb(89,154,4)'}}> {item.deadline}</span> : ''}
                             </ContentCell>
                             <ContentCell width={'15%'}>
                                 <Button onClick={()=>taskChange(item.id)}>{ item.completed===false ? <BiCheck /> : <BiRevision />}</Button>
