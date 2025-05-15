@@ -1,13 +1,11 @@
 import css from "../../styles/form.css";
-
+import { useState } from "react";
 
 const {Input} = css
 
-
 const InputComponent = (props) => {
-
-    const {placeholder, inputValue, action} = props
-
+    const {placeholder, inputValue, action, type = "text"} = props
+    const [isFocused, setIsFocused] = useState(false)
     const maxLength = 100
 
     const handleDateChange = (event) => {
@@ -35,24 +33,26 @@ const InputComponent = (props) => {
                 value={inputValue}
                 placeholder={placeholder}
                 onChange={handleDateChange}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 maxLength={10}
             />
         )
     }
 
     return (
-        <>
-            <Input
-            type={"text"}
+        <Input
+            type={type}
             value={inputValue}
             placeholder={placeholder}
-            maxLength={maxLength}
+            maxLength={type === "text" ? maxLength : undefined}
             onChange={event=> {
                 const newValue = event.target.value
                 action(newValue)
             }}
-            />
-        </>
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+        />
     )
 }
 

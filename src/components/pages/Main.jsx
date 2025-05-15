@@ -12,40 +12,48 @@ import FormLabel from '@mui/material/FormLabel'
 const {FormContainer, Wrap} = css
 
 const Main = () => {
-    const [task, setTask] = useState('')
+
+    const [task, setTask ] = useState('')
     const [data, setData] = useState([])
     const [category, setCategory] = useState('')
     const [deadline, setDeadline] = useState('')
+    const [priority, setPriority] = useState('средний')
 
     const handleAdd = () => {
-        if (category!=='') {
-        console.log('OK')
-        setData(
-            prev => { const newData = [ { 
-                id: Date.now(),
-                task: task, 
-                completed: false,
-                category: category,
-                deadline: deadline
-            }, ...prev]
-            localStorage.setItem('tasks', JSON.stringify(newData))
-            return newData
-        }
-        )
+        if (category!=='' && task.trim()!='') {
+            setData(
+                prev => { const newData = [ { 
+                    id: Date.now(),
+                    task: task.trim(), 
+                    completed: false,
+                    category: category,
+                    deadline: deadline,
+                    priority: priority,
+                    createdAt: new Date().toISOString()
+                }, ...prev]
+                localStorage.setItem('tasks', JSON.stringify(newData))
+                console.log(newData)
+                return newData
+            }
+            )
 
-        setTask('')
-        setDeadline('')}
+            setTask('')
+            setDeadline('')
+            setPriority('средний')
+        }
     }
 
     const onComplete = (id) => {
         setData(prev => {
-            const newData = prev.map(item =>
-                item.id === id
-                    ? { ...item, completed: !item.completed }
-                    : item)
+            const newData =  prev.map(item => 
+                item.id === id 
+                ? {...item, completed: !item.completed}
+                : item)
             localStorage.setItem('tasks', JSON.stringify(newData))
             return newData
-        })
+            }
+            )
+        
     }
 
     const handleDelete = (id) => {
@@ -60,22 +68,46 @@ const Main = () => {
         setCategory(event.target.value)
     }
 
-    useEffect(() => {
+    useEffect(()=> {
         const savedData = JSON.parse(localStorage.getItem('tasks'))
         if (savedData) {
             setData(savedData)
         }
     },[])
 
-
     return (
+        <>
         <Wrap>
             <FormContainer>
-                <InputComponent inputValue={task} action={setTask} placeholder={'Введите задачу'}></InputComponent>
-                <InputComponent inputValue={deadline} action={setDeadline} placeholder={'Введите срок задачи'}></InputComponent>
+                <InputComponent 
+                inputValue={task} 
+                action={setTask} 
+                placeholder={'Введите задачу'} 
+                type="text">
+                </InputComponent>
+                <InputComponent
+                    inputValue={deadline}
+                    action={setDeadline}
+                    placeholder={'Срок выполнения'}
+                    type="date"
+                />
                 <FormControl>
-                    <FormLabel>Выберите тип задачи</FormLabel>
+                    <FormLabel>Приоритет задачи</FormLabel>
                     <RadioGroup
+                        row
+                        value={priority}
+                        onChange={(e) => setPriority(e.target.value)}
+                    >
+                        <FormControlLabel value="низкий" control={<Radio />} label="Низкий" />
+                        <FormControlLabel value="средний" control={<Radio />} label="Средний" />
+                        <FormControlLabel value="высокий" control={<Radio />} label="Высокий" />
+                    </RadioGroup>
+                </FormControl>
+                <FormControl>
+                    <FormLabel id="demo-controlled-radio-buttons-group">Выберите тип задачи</FormLabel>
+                    <RadioGroup
+                        aria-labelledby="demo-controlled-radio-buttons-group"
+                        name="controlled-radio-buttons-group"
                         value={category}
                         onChange={handleChange}
                     >
@@ -86,12 +118,11 @@ const Main = () => {
                     </RadioGroup>
                 </FormControl>
                 
-                <Button value={category} onClick={handleAdd}>Добавить задачу</Button>
+                <Button value={category && task.trim() ? 'primary' : ''} onClick={handleAdd}>Добавить задачу</Button>
             </FormContainer>
-            <TaskList data={data} onDelete={handleDelete} taskChange={onComplete} />
+            <TaskList data={data} onDelete={handleDelete} taskChange={onComplete}></TaskList>
         </Wrap>
         </>
-
     )
 }
 

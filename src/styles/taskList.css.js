@@ -17,7 +17,6 @@ const css = {
         max-width: 800px;
         box-sizing: border-box;
         transition: all 0.3s ease;
-        min-height: 200px;
         &:hover {
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
         }
@@ -142,7 +141,7 @@ const css = {
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background-color: ${props => props.color};
+        background-color: ${props => props.color || '#7cff6b'};
         margin-right: 8px;
     `
 }
