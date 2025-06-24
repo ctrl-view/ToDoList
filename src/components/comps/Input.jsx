@@ -5,7 +5,7 @@ const {Input} = css
 
 const InputComponent = (props) => {
     const {placeholder, inputValue, action, type = "text"} = props
-    const [isFocused, setIsFocused] = useState(false)
+    const [, setIsFocused] = useState(false)
     const maxLength = 100
 
     const handleDateChange = (event) => {

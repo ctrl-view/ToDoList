@@ -72,7 +72,7 @@ const TaskList = (props) => {
                 </Select>
             </SelectContainer>
             <DataContainer>
-                {filterData.map((item, index) => {
+                {filterData.map((item,) => {
                     return (
                         <ContentLine key={item.id} style={{marginBottom: '10px'}}>
                             <PriorityCell>

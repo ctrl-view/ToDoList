@@ -1,0 +1,6 @@
+{
+  "name": "My Vue3 App",
+  "short_name": "VueApp",
+  "start_url": "/",
+  "display": "fullscreen"
+}
